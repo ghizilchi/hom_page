@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#063D32">
+    <title>قیزیلچی | سیستم یکپارچه مدیریت طلافروشی</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --emerald: #075B46;
+            --deep: #063D32;
+            --dark: #052D26;
+            --light-green: #138568;
+            --gold: #D8AD52;
+            --gold-light: #F4DFAA;
+            --cream: #FAF9F3;
+            --white: #fff;
+            --text: #252D28;
+            --muted: #817F77;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        .container {
+            width: min(1160px, 90%);
+            margin: auto;
+        }
+
+        /* NAVBAR */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(250, 249, 243, .9);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(7, 91, 70, .1);
+        }
+
+        .navbar {
+            height: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--emerald);
+        }
+
+        .logo-icon {
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            background: var(--emerald);
+            color: var(--gold-light);
+            border-radius: 14px;
+            font-size: 26px;
+            box-shadow: 0 7px 20px rgba(7, 91, 70, .2);
+            transition: .4s;
+        }
+
+        .logo:hover .logo-icon {
+            transform: rotate(15deg) scale(1.08);
+        }
+
+        .logo-name {
+            font-size: 25px;
+            font-weight: 900;
+        }
+
+        .logo-name small {
+            display: block;
+            font-size: 9px;
+            letter-spacing: 2px;
+            font-weight: 600;
+            color: var(--muted);
+            direction: ltr;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #536B62;
+        }
+
+        nav a:not(.btn):hover {
+            color: var(--emerald);
+        }
+
+        .btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 9px;
+            padding: 13px 25px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            border: none;
+            transition: .3s;
+        }
+
+        .btn-primary {
+            background: var(--emerald);
+            color: white;
+            box-shadow: 0 8px 22px rgba(7, 91, 70, .2);
+        }
+
+        .btn-primary:hover {
+            background: var(--deep);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(7, 91, 70, .3);
+        }
+
+        .btn-gold {
+            background: var(--gold-light);
+            color: var(--deep);
+        }
+
+        .btn-gold:hover {
+            background: white;
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255, 255, 255, .4);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--emerald);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--emerald);
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        /* HERO */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 105px 0 115px;
+            color: white;
+            background:
+                radial-gradient(ellipse at 80% 15%, rgba(216, 173, 82, .2), transparent 30%),
+                radial-gradient(ellipse at 10% 90%, rgba(19, 133, 104, .25), transparent 35%),
+                linear-gradient(125deg, #042E26, #063D32 45%, #08765A);
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            border: 1px solid rgba(244, 223, 170, .13);
+            border-radius: 50%;
+            width: 500px;
+            height: 500px;
+            left: -200px;
+            top: -180px;
+            box-shadow:
+                0 0 0 50px rgba(244, 223, 170, .025),
+                0 0 0 100px rgba(244, 223, 170, .02);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            width: 350px;
+            height: 350px;
+            left: auto;
+            right: -180px;
+            top: auto;
+            bottom: -180px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            align-items: center;
+            gap: 65px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 16px;
+            border-radius: 30px;
+            background: rgba(244, 223, 170, .1);
+            border: 1px solid rgba(244, 223, 170, .2);
+            color: var(--gold-light);
+            font-size: 12px;
+            margin-bottom: 25px;
+        }
+
+        .eyebrow span {
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--gold);
+        }
+
+        .hero h1 {
+            font-size: clamp(35px, 4.5vw, 57px);
+            line-height: 1.7;
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 strong {
+            color: var(--gold-light);
+        }
+
+        .hero-description {
+            color: #D7E9E1;
+            font-size: 14px;
+            line-height: 2.5;
+            margin: 20px 0 30px;
+            max-width: 550px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 13px;
+            flex-wrap: wrap;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 55px;
+        }
+
+        .hero-stats strong {
+            display: block;
+            color: var(--gold-light);
+            font-size: 21px;
+        }
+
+        .hero-stats span {
+            font-size: 11px;
+            color: #C4DED3;
+        }
+
+        /* 3D DASHBOARD */
+
+        .dashboard-wrapper {
+            position: relative;
+            perspective: 1200px;
+        }
+
+        .dashboard {
+            position: relative;
+            padding: 19px;
+            background: white;
+            border-radius: 20px;
+            color: var(--text);
+            border: 1px solid rgba(255, 255, 255, .8);
+            box-shadow: 0 45px 100px rgba(1, 25, 19, .4);
+            transform: rotateY(-8deg) rotateX(4deg) rotateZ(-1deg);
+            transform-style: preserve-3d;
+            animation: dashboardFloat 7s ease-in-out infinite;
+            transition: transform .2s;
+        }
+
+        .dashboard-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 5px 18px;
+        }
+
+        .dashboard-top strong {
+            color: var(--emerald);
+            font-size: 17px;
+        }
+
+        .dashboard-top span {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 55px 1fr;
+            gap: 12px;
+        }
+
+        .sidebar {
+            background: #EDF5F0;
+            border-radius: 10px;
+            padding: 12px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 19px;
+            font-size: 18px;
+        }
+
+        .sidebar .active {
+            background: var(--emerald);
+            color: white;
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border-radius: 9px;
+        }
+
+        .dash-main {
+            min-width: 0;
+        }
+
+        .dash-welcome {
+            font-size: 12px;
+            font-weight: 800;
+            margin: 5px 0 13px;
+        }
+
+        .dash-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .dash-card {
+            background: #F5F8F4;
+            border: 1px solid #edf0e9;
+            border-radius: 9px;
+            padding: 11px 8px;
+        }
+
+        .dash-card small {
+            color: var(--muted);
+            font-size: 9px;
+        }
+
+        .dash-card strong {
+            display: block;
+            color: var(--emerald);
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .dash-chart {
+            margin-top: 13px;
+            border: 1px solid #edf0e9;
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .dash-chart h4 {
+            font-size: 10px;
+            margin-bottom: 12px;
+        }
+
+        .chart-bars {
+            height: 105px;
+            display: flex;
+            align-items: end;
+            justify-content: space-around;
+            gap: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .chart-bars i {
+            display: block;
+            width: 9%;
+            border-radius: 5px 5px 0 0;
+            background: linear-gradient(var(--gold), var(--emerald));
+            animation: barGrow 1.5s ease backwards;
+        }
+
+        .chart-bars i:nth-child(2) {
+            animation-delay: .1s;
+        }
+
+        .chart-bars i:nth-child(3) {
+            animation-delay: .2s;
+        }
+
+        .chart-bars i:nth-child(4) {
+            animation-delay: .3s;
+        }
+
+        .chart-bars i:nth-child(5) {
+            animation-delay: .4s;
+        }
+
+        .chart-bars i:nth-child(6) {
+            animation-delay: .5s;
+        }
+
+        .chart-bars i:nth-child(7) {
+            animation-delay: .6s;
+        }
+
+        .dash-bottom {
+            display: flex;
+            justify-content: space-between;
+            font-size: 9px;
+            color: var(--muted);
+            margin-top: 8px;
+        }
+
+        .floating-tag {
+            position: absolute;
+            background: white;
+            border: 1px solid rgba(7, 91, 70, .1);
+            border-radius: 12px;
+            padding: 12px 17px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, .15);
+            color: var(--emerald);
+            font-size: 12px;
+            font-weight: 800;
+            animation: tagFloat 5s ease-in-out infinite;
+        }
+
+        .tag-one {
+            top: 45px;
+            left: -40px;
+        }
+
+        .tag-two {
+            bottom: 35px;
+            right: -40px;
+            animation-delay: -2s;
+        }
+
+        /* TRUST */
+
+        .trust {
+            background: white;
+            padding: 27px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .trust-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 22px;
+            color: #817F77;
+            font-size: 13px;
+        }
+
+        .trust-content strong {
+            color: var(--emerald);
+            font-size: 15px;
+        }
+
+        /* GENERAL SECTIONS */
+
+        .content-section {
+            padding: 100px 0;
+        }
+
+        .section-heading {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 55px;
+        }
+
+        .section-label {
+            color: var(--light-green);
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 13px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(25px, 3vw, 36px);
+            line-height: 1.8;
+            font-weight: 900;
+            color: #173D31;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 2.4;
+            margin-top: 13px;
+        }
+
+        /* FEATURES */
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            position: relative;
+            overflow: hidden;
+            background: white;
+            border: 1px solid #eee;
+            padding: 28px;
+            border-radius: 17px;
+            transition: .4s;
+        }
+
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            top: -100px;
+            left: -80px;
+            background: radial-gradient(circle, rgba(216, 173, 82, .18), transparent 70%);
+            transition: .5s;
+        }
+
+        .feature-card:hover::before {
+            transform: scale(2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-9px);
+            border-color: rgba(7, 91, 70, .3);
+            box-shadow: 0 20px 45px rgba(6, 61, 50, .09);
+        }
+
+        .feature-icon {
+            position: relative;
+            width: 54px;
+            height: 54px;
+            display: grid;
+            place-items: center;
+            background: #EAF4EE;
+            color: var(--emerald);
+            border-radius: 15px;
+            font-size: 25px;
+            margin-bottom: 22px;
+            box-shadow: 0 8px 18px rgba(7, 91, 70, .08);
+            transition: .4s;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: translateY(-5px) rotate(-8deg) scale(1.08);
+        }
+
+        .feature-card h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #173D31;
+        }
+
+        .feature-card p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 2.4;
+        }
+
+        /* 3D GEM SHOWCASE */
+
+        .showcase {
+            background: #F0F4ED;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .showcase-image {
+            min-height: 390px;
+            border-radius: 23px;
+            background:
+                radial-gradient(circle at 50% 40%, rgba(20, 155, 112, .35), transparent 40%),
+                linear-gradient(145deg, #075B46, #042F27);
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(6, 61, 50, .15);
+        }
+
+        .gem-scene {
+            width: 100%;
+            min-height: 370px;
+            display: grid;
+            place-items: center;
+            perspective: 1000px;
+            position: relative;
+        }
+
+        .gem-orbit {
+            position: absolute;
+            width: 270px;
+            height: 270px;
+            border: 1px solid rgba(244, 223, 170, .27);
+            border-radius: 50%;
+            transform: rotateX(68deg) rotateZ(-25deg);
+            animation: orbitSpin 16s linear infinite;
+        }
+
+        .orbit-two {
+            width: 350px;
+            height: 350px;
+            border-color: rgba(244, 223, 170, .13);
+            animation-duration: 22s;
+            animation-direction: reverse;
+        }
+
+        .gem {
+            position: relative;
+            width: 155px;
+            height: 185px;
+            transform-style: preserve-3d;
+            clip-path: polygon(25% 0, 75% 0, 100% 32%, 50% 100%, 0 32%);
+            background: linear-gradient(135deg, #B5F1D4, #168D68 22%, #064C3B 52%, #0B7958 76%, #C3F5D8);
+            filter: drop-shadow(0 28px 25px rgba(0, 0, 0, .35));
+            animation: gemFloat 5s ease-in-out infinite, gemTurn 14s ease-in-out infinite;
+        }
+
+        .gem::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(125deg, rgba(255, 255, 255, .78), transparent 28%, transparent 68%, rgba(244, 223, 170, .55));
+        }
+
+        .gem-facet {
+            position: absolute;
+            inset: 0;
+        }
+
+        .facet-a {
+            background: linear-gradient(145deg, rgba(220, 255, 238, .8), transparent);
+            clip-path: polygon(25% 0, 50% 32%, 0 32%);
+        }
+
+        .facet-b {
+            background: linear-gradient(35deg, #0B7656, #8CE0B7);
+            clip-path: polygon(25% 0, 75% 0, 50% 32%);
+        }
+
+        .facet-c {
+            background: linear-gradient(120deg, #064331, #31B181);
+            clip-path: polygon(0 32%, 50% 32%, 50% 100%);
+        }
+
+        .facet-d {
+            background: linear-gradient(45deg, #063B30, #1A9B70);
+            clip-path: polygon(50% 32%, 100% 32%, 50% 100%);
+        }
+
+        .facet-e {
+            background: linear-gradient(135deg, rgba(255, 255, 255, .45), transparent);
+            clip-path: polygon(75% 0, 100% 32%, 50% 32%);
+        }
+
+        .facet-f {
+            background: linear-gradient(90deg, rgba(244, 223, 170, .42), transparent);
+            clip-path: polygon(0 32%, 25% 0, 50% 32%);
+        }
+
+        .gem-caption {
+            position: absolute;
+            bottom: 25px;
+            color: rgba(244, 223, 170, .8);
+            font-size: 9px;
+            letter-spacing: 3px;
+            direction: ltr;
+        }
+
+        .showcase-text h2 {
+            font-size: 30px;
+            line-height: 1.9;
+            margin-bottom: 15px;
+            color: #173D31;
+        }
+
+        .showcase-text>p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 2.5;
+            margin-bottom: 25px;
+        }
+
+        .check-item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin: 18px 0;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .check {
+            background: #E3D3A9;
+            color: var(--deep);
+            min-width: 25px;
+            height: 25px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+        }
+
+        /* BENEFITS */
+
+        .benefits {
+            padding: 85px 0;
+            color: white;
+            background:
+                radial-gradient(circle at 85% 10%, rgba(19, 133, 104, .2), transparent 28%),
+                linear-gradient(120deg, #052D26, #063D32);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            text-align: center;
+        }
+
+        .benefit strong {
+            display: block;
+            color: var(--gold-light);
+            font-size: 37px;
+            margin-bottom: 10px;
+            text-shadow: 0 5px 22px rgba(216, 173, 82, .2);
+        }
+
+        .benefit h3 {
+            font-size: 14px;
+            margin-bottom: 9px;
+        }
+
+        .benefit p {
+            font-size: 11px;
+            color: #C5DCD1;
+            line-height: 2.2;
+        }
+
+        /* CTA */
+
+        .cta {
+            padding: 95px 0;
+        }
+
+        .cta-box {
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            border-radius: 25px;
+            padding: 70px 25px;
+            color: white;
+            background:
+                radial-gradient(circle at 12% 15%, rgba(216, 173, 82, .2), transparent 28%),
+                linear-gradient(120deg, #075B46, #063D32);
+            box-shadow: 0 25px 65px rgba(6, 61, 50, .16);
+        }
+
+        .cta-box h2 {
+            font-size: 30px;
+            line-height: 1.9;
+        }
+
+        .cta-box p {
+            color: #D5E8DE;
+            font-size: 13px;
+            margin: 15px 0 28px;
+            line-height: 2.3;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: linear-gradient(145deg, #052D26, #031F1A);
+            color: white;
+            padding: 55px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 50px;
+            padding-bottom: 40px;
+        }
+
+        .footer-about p {
+            color: #B4C9BE;
+            font-size: 12px;
+            line-height: 2.5;
+            margin-top: 18px;
+            max-width: 350px;
+        }
+
+        footer h4 {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: var(--gold-light);
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer li {
+            font-size: 12px;
+            color: #B4C9BE;
+            margin-bottom: 15px;
+        }
+
+        footer a:hover {
+            color: var(--gold-light);
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, .1);
+            text-align: center;
+            padding-top: 20px;
+            color: #8FA99A;
+            font-size: 11px;
+        }
+
+        /* ANIMATIONS */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px) scale(.985);
+            transition: opacity .75s ease, transform .75s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        @keyframes dashboardFloat {
+
+            0%,
+            100% {
+                transform: rotateY(-8deg) rotateX(4deg) rotateZ(-1deg) translateY(0);
+            }
+
+            50% {
+                transform: rotateY(-5deg) rotateX(2deg) translateY(-13px);
+            }
+        }
+
+        @keyframes tagFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-11px);
+            }
+        }
+
+        @keyframes gemFloat {
+
+            0%,
+            100% {
+                translate: 0 0;
+            }
+
+            50% {
+                translate: 0 -16px;
+            }
+        }
+
+        @keyframes gemTurn {
+
+            0%,
+            100% {
+                rotate: -2deg;
+            }
+
+            50% {
+                rotate: 5deg;
+            }
+        }
+
+        @keyframes orbitSpin {
+            from {
+                rotate: 0deg;
+            }
+
+            to {
+                rotate: 360deg;
+            }
+        }
+
+        @keyframes barGrow {
+            from {
+                height: 0;
+            }
+        }
+
+        .btn-primary,
+        .btn-gold {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::after,
+        .btn-gold::after {
+            content: "";
+            position: absolute;
+            top: -80%;
+            right: -50%;
+            width: 35%;
+            height: 260%;
+            transform: rotate(25deg);
+            background: rgba(255, 255, 255, .25);
+            transition: right .65s;
+        }
+
+        .btn-primary:hover::after,
+        .btn-gold:hover::after {
+            right: 120%;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:900px) {
+            nav {
+                gap: 15px;
+            }
+
+            .hero-grid {
+                gap: 35px;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .showcase-grid {
+                gap: 35px;
+            }
+
+            .tag-one {
+                left: -10px;
+            }
+
+            .tag-two {
+                right: -10px;
+            }
+        }
+
+        @media(max-width:700px) {
+            .navbar {
+                height: 70px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 100%;
+                background: white;
+                padding: 25px 5%;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 20px;
+                box-shadow: 0 15px 20px rgba(0, 0, 0, .08);
+            }
+
+            nav.open {
+                display: flex;
+            }
+
+            nav .btn {
+                width: 100%;
+            }
+
+            .hero {
+                padding: 65px 0 85px;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 65px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-description {
+                font-size: 13px;
+            }
+
+            .hero-stats {
+                gap: 25px;
+                margin-top: 40px;
+            }
+
+            .hero-stats strong {
+                font-size: 19px;
+            }
+
+            .dashboard {
+                max-width: 460px;
+                margin: auto;
+                width: 92%;
+                transform: none;
+                animation: mobileFloat 7s ease-in-out infinite;
+            }
+
+            .floating-tag {
+                font-size: 10px;
+                padding: 10px;
+            }
+
+            .trust-content {
+                justify-content: center;
+            }
+
+            .content-section {
+                padding: 70px 0;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .showcase-image {
+                min-height: 300px;
+            }
+
+            .showcase-text h2 {
+                font-size: 25px;
+            }
+
+            .gem-scene {
+                min-height: 290px;
+            }
+
+            .gem {
+                width: 125px;
+                height: 150px;
+            }
+
+            .gem-orbit {
+                width: 220px;
+                height: 220px;
+            }
+
+            .orbit-two {
+                width: 285px;
+                height: 285px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 35px 15px;
+            }
+
+            .cta-box h2 {
+                font-size: 24px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+
+            .footer-about {
+                grid-column: 1/-1;
+            }
+        }
+
+        @keyframes mobileFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-9px);
+            }
+        }
+
+        @media(max-width:380px) {
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .hero-stats {
+                gap: 15px;
+            }
+
+            .dash-cards {
+                gap: 4px;
+            }
+
+            .dash-card {
+                padding: 8px 4px;
+            }
+
+            .dash-card strong {
+                font-size: 10px;
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header>
+        <div class="container navbar">
+
+            <a href="#" class="logo">
+                <div class="logo-icon">✦</div>
+                <div class="logo-name">
+                    قیزیلچی
+                    <small>GHIZILCHI ERP</small>
+                </div>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle">☰</button>
+
+            <nav id="navMenu">
+                <a href="#features">امکانات</a>
+                <a href="#about">درباره قیزیلچی</a>
+                <a href="#benefits">مزایا</a>
+                <a href="#contact">ارتباط با ما</a>
+                <a href="#contact" class="btn btn-primary">درخواست مشاوره ←</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- HERO -->
+
+    <section class="hero">
+        <div class="container hero-grid">
+
+            <div class="hero-text">
+
+                <div class="eyebrow">
+                    <span></span>
+                    سیستم یکپارچه مدیریت طلافروشی
+                </div>
+
+                <h1>
+                    مدیریت هوشمند طلافروشی،
+                    <strong>درخشش متفاوت کسب‌وکار شما</strong>
+                </h1>
+
+                <p class="hero-description">
+                    قیزیلچی، راهکاری یکپارچه برای مدیریت فروشگاه آنلاین،
+                    موجودی طلا، حسابداری، سفارش‌ها و فرآیندهای روزمره
+                    کسب‌وکار شماست. همه چیز در یک سیستم، با دقت و سرعت بیشتر.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-gold">
+                        درخواست دموی رایگان ←
+                    </a>
+
+                    <a href="#features" class="btn btn-outline">
+                        آشنایی با امکانات
+                    </a>
+                </div>
+
+                <div class="hero-stats">
+                    <div>
+                        <strong>یکپارچه</strong>
+                        <span>تمام بخش‌های کسب‌وکار</span>
+                    </div>
+
+                    <div>
+                        <strong>هوشمند</strong>
+                        <span>مدیریت دقیق اطلاعات</span>
+                    </div>
+
+                    <div>
+                        <strong>آنلاین</strong>
+                        <span>دسترسی آسان و سریع</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- DASHBOARD MOCKUP -->
+
+            <div class="dashboard-wrapper">
+
+                <div class="dashboard">
+
+                    <div class="dashboard-top">
+                        <strong>✦ Ghizilchi Dashboard</strong>
+                        <span>پنل مدیریت فروشگاه</span>
+                    </div>
+
+                    <div class="dashboard-content">
+
+                        <div class="sidebar">
+                            <span class="active">⌂</span>
+                            <span>◈</span>
+                            <span>▤</span>
+                            <span>♧</span>
+                            <span>▦</span>
+                            <span>⚙</span>
+                        </div>
+
+                        <div class="dash-main">
+
+                            <div class="dash-welcome">
+                                خوش آمدید! 👋
+                            </div>
+
+                            <div class="dash-cards">
+
+                                <div class="dash-card">
+                                    <small>موجودی انبار</small>
+                                    <strong>۱۲۵ قطعه</strong>
+                                </div>
+
+                                <div class="dash-card">
+                                    <small>سفارش‌ها</small>
+                                    <strong>۳۸ سفارش</strong>
+                                </div>
+
+                                <div class="dash-card">
+                                    <small>محصولات</small>
+                                    <strong>۲۴۰ عدد</strong>
+                                </div>
+
+                            </div>
+
+                            <div class="dash-chart">
+                                <h4>روند فروش فروشگاه</h4>
+
+                                <div class="chart-bars">
+                                    <i style="height:40%"></i>
+                                    <i style="height:60%"></i>
+                                    <i style="height:48%"></i>
+                                    <i style="height:80%"></i>
+                                    <i style="height:65%"></i>
+                                    <i style="height:95%"></i>
+                                    <i style="height:75%"></i>
+                                </div>
+
+                                <div class="dash-bottom">
+                                    <span>شنبه</span>
+                                    <span>یکشنبه</span>
+                                    <span>دوشنبه</span>
+                                    <span>سه‌شنبه</span>
+                                    <span>چهارشنبه</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="floating-tag tag-one">
+                    ✦ مدیریت هوشمند انبار
+                </div>
+
+                <div class="floating-tag tag-two">
+                    ✓ سیستم یکپارچه فروش
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TRUST -->
+
+    <div class="trust">
+        <div class="container trust-content">
+            <strong>یک سیستم، تمام نیازهای شما</strong>
+            <span>✦ فروش آنلاین</span>
+            <span>✦ حسابداری</span>
+            <span>✦ مدیریت موجودی</span>
+            <span>✦ رهگیری با QR Code</span>
+        </div>
+    </div>
+
+    <!-- FEATURES -->
+
+    <section class="content-section" id="features">
+
+        <div class="container">
+
+            <div class="section-heading reveal">
+                <div class="section-label">امکانات قیزیلچی</div>
+
+                <h2>
+                    تمام ابزارهای مورد نیاز طلافروشی،
+                    در یک پنل یکپارچه
+                </h2>
+
+                <p>
+                    دیگر نیازی به استفاده از چندین نرم‌افزار مختلف نیست.
+                    قیزیلچی بخش‌های مختلف کسب‌وکار شما را به یکدیگر متصل می‌کند.
+                </p>
+            </div>
+
+            <div class="features-grid">
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🛍️</div>
+                    <h3>فروشگاه آنلاین</h3>
+                    <p>
+                        راه‌اندازی فروشگاه اینترنتی اختصاصی برای نمایش محصولات،
+                        معرفی طلا و جواهر و مدیریت سفارش‌های آنلاین.
+                    </p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">📦</div>
+                    <h3>مدیریت انبار</h3>
+                    <p>
+                        مدیریت دقیق موجودی، وزن، عیار، مشخصات محصولات،
+                        ورود و خروج کالا و کنترل تغییرات انبار.
+                    </p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🧾</div>
+                    <h3>صدور فاکتور و رسید</h3>
+                    <p>
+                        ثبت فروش، صدور فاکتور و رسیدهای حرفه‌ای
+                        و دسترسی سریع به سوابق تراکنش‌ها.
+                    </p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">▦</div>
+                    <h3>QR Code اختصاصی</h3>
+                    <p>
+                        اختصاص کد QR به محصولات برای شناسایی،
+                        دسترسی سریع به اطلاعات و رهگیری کالاها.
+                    </p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">💰</div>
+                    <h3>حسابداری و امور مالی</h3>
+                    <p>
+                        مدیریت دریافت‌ها، پرداخت‌ها، هزینه‌ها،
+                        درآمدها و گزارش‌های مالی کسب‌وکار.
+                    </p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">📊</div>
+                    <h3>گزارش‌گیری و تحلیل</h3>
+                    <p>
+                        مشاهده گزارش‌های فروش، وضعیت موجودی،
+                        عملکرد مالی و بررسی روند کسب‌وکار.
+                    </p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">👥</div>
+                    <h3>مدیریت مشتریان</h3>
+                    <p>
+                        ثبت اطلاعات مشتریان، سوابق خرید،
+                        مدیریت ارتباطات و دسترسی به اطلاعات آن‌ها.
+                    </p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🛒</div>
+                    <h3>مدیریت سفارش‌ها</h3>
+                    <p>
+                        ثبت و پیگیری سفارش‌ها، کنترل وضعیت پردازش
+                        و مدیریت فرآیند تحویل محصولات.
+                    </p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>مدیریت یکپارچه</h3>
+                    <p>
+                        ارتباط میان فروش، انبار، حسابداری و فروشگاه
+                        برای کاهش خطا و افزایش سرعت عملیات.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SHOWCASE -->
+
+    <section class="content-section showcase" id="about">
+
+        <div class="container showcase-grid">
+
+            <div class="showcase-image reveal">
+
+                <div class="gem-scene">
+
+                    <div class="gem-orbit"></div>
+                    <div class="gem-orbit orbit-two"></div>
+
+                    <div class="gem">
+                        <span class="gem-facet facet-a"></span>
+                        <span class="gem-facet facet-b"></span>
+                        <span class="gem-facet facet-c"></span>
+                        <span class="gem-facet facet-d"></span>
+                        <span class="gem-facet facet-e"></span>
+                        <span class="gem-facet facet-f"></span>
+                    </div>
+
+                    <div class="gem-caption">
+                        GHIZILCHI · GOLD BUSINESS ERP
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="showcase-text reveal">
+
+                <div class="section-label">چرا قیزیلچی؟</div>
+
+                <h2>
+                    کسب‌وکار طلا و جواهر،
+                    شایسته مدیریتی دقیق و حرفه‌ای است.
+                </h2>
+
+                <p>
+                    در بازار طلا، کوچک‌ترین جزئیات اهمیت دارند.
+                    از ثبت دقیق وزن و مشخصات محصول گرفته تا مدیریت
+                    سفارش‌ها و کنترل موجودی؛ قیزیلچی برای یکپارچه‌سازی
+                    این فرآیندها طراحی شده است.
+                </p>
+
+                <div class="check-item">
+                    <span class="check">✓</span>
+                    مدیریت متمرکز اطلاعات و عملیات
+                </div>
+
+                <div class="check-item">
+                    <span class="check">✓</span>
+                    دسترسی سریع به اطلاعات محصولات با QR Code
+                </div>
+
+                <div class="check-item">
+                    <span class="check">✓</span>
+                    ارتباط فروشگاه آنلاین با سیستم مدیریت
+                </div>
+
+                <div class="check-item">
+                    <span class="check">✓</span>
+                    گزارش‌های دقیق برای تصمیم‌گیری بهتر
+                </div>
+
+                <div class="check-item">
+                    <span class="check">✓</span>
+                    کاهش ورود اطلاعات تکراری و خطاهای انسانی
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- BENEFITS -->
+
+    <section class="benefits" id="benefits">
+
+        <div class="container">
+
+            <div class="section-heading">
+                <div class="section-label" style="color:var(--gold-light)">
+                    تجربه متفاوت مدیریت
+                </div>
+
+                <h2 style="color:white">
+                    از مدیریت سنتی تا کسب‌وکار هوشمند
+                </h2>
+
+                <p style="color:#C5DCD1">
+                    با قیزیلچی، مدیریت کسب‌وکار خود را ساده‌تر و منظم‌تر کنید.
+                </p>
+            </div>
+
+            <div class="benefits-grid">
+
+                <div class="benefit">
+                    <strong>۰۱</strong>
+                    <h3>تمرکز اطلاعات</h3>
+                    <p>همه اطلاعات در یک سیستم واحد</p>
+                </div>
+
+                <div class="benefit">
+                    <strong>۰۲</strong>
+                    <h3>دقت بیشتر</h3>
+                    <p>کاهش خطا در ثبت و مدیریت اطلاعات</p>
+                </div>
+
+                <div class="benefit">
+                    <strong>۰۳</strong>
+                    <h3>سرعت بالاتر</h3>
+                    <p>دسترسی سریع به فرآیندهای کاری</p>
+                </div>
+
+                <div class="benefit">
+                    <strong>۰۴</strong>
+                    <h3>مدیریت بهتر</h3>
+                    <p>تصمیم‌گیری بر اساس گزارش‌های دقیق</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+
+    <section class="cta" id="contact">
+
+        <div class="container">
+
+            <div class="cta-box reveal">
+
+                <div class="section-label" style="color:var(--gold-light)">
+                    قدم بعدی برای کسب‌وکار شما
+                </div>
+
+                <h2>
+                    آماده‌اید مدیریت طلافروشی خود را متحول کنید؟
+                </h2>
+
+                <p>
+                    با قیزیلچی آشنا شوید و امکانات یک سیستم مدیریت
+                    یکپارچه را برای کسب‌وکار خود تجربه کنید.
+                </p>
+
+                <a href="tel:+989143081984" class="btn btn-gold">
+                    درخواست مشاوره و دمو ←
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-about">
+
+                    <a href="#" class="logo">
+                        <div class="logo-icon">✦</div>
+                        <div class="logo-name" style="color:white">
+                            قیزیلچی
+                            <small style="color:#B8D4C5">
+                                GHIZILCHI ERP
+                            </small>
+                        </div>
+                    </a>
+
+                    <p>
+                        قیزیلچی، سیستم یکپارچه مدیریت طلافروشی؛
+                        راهکاری برای مدیریت هوشمند فروش، انبار،
+                        حسابداری و فروشگاه آنلاین طلا و جواهر.
+                    </p>
+
+                </div>
+
+                <div>
+                    <h4>دسترسی سریع</h4>
+                    <ul>
+                        <li><a href="#features">امکانات سیستم</a></li>
+                        <li><a href="#about">درباره قیزیلچی</a></li>
+                        <li><a href="#benefits">مزایای استفاده</a></li>
+                        <li><a href="#contact">درخواست دمو</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>ارتباط با ما</h4>
+                    <ul>
+                        <li>
+                            <a href="tel:+989143081984">09143081984</a>
+                        </li>
+                        <li>
+                            <a href="mailto:takrayaofficial@gmail.com">
+                                takrayaofficial@gmail.com
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://takraya.ir">
+                                takraya.ir
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="copyright">
+                © تمامی حقوق این نرم‌افزار متعلق به شرکت تک رایا است.
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+
+        // Mobile menu
+
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+        });
+
+        document.querySelectorAll('#navMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('open');
+            });
+        });
+
+
+        // Scroll reveal animation
+
+        const observer = new IntersectionObserver(entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+
+            });
+
+        }, {
+            threshold: 0.12
+        });
+
+        document.querySelectorAll('.reveal').forEach(element => {
+            observer.observe(element);
+        });
+
+
+        // Interactive 3D dashboard tilt
+
+        const dashboard = document.querySelector('.dashboard');
+
+        if (
+            dashboard &&
+            window.matchMedia('(pointer: fine)').matches &&
+            !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ) {
+
+            dashboard.addEventListener('pointermove', event => {
+
+                const rect = dashboard.getBoundingClientRect();
+
+                const x = (event.clientX - rect.left) / rect.width - 0.5;
+                const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+                dashboard.style.animation = 'none';
+
+                dashboard.style.transform =
+                    `perspective(1200px)
+             rotateY(${-8 + x * 9}deg)
+             rotateX(${4 - y * 8}deg)
+             rotateZ(-1deg)
+             translateY(-5px)`;
+
+            });
+
+            dashboard.addEventListener('pointerleave', () => {
+                dashboard.style.animation = '';
+                dashboard.style.transform = '';
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>
